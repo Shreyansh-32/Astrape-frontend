@@ -9,6 +9,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Input } from "./input";
 import { Button } from "./button";
+import { useAppContext } from "@/context/AuthContext";
 
 interface SignInInput {
   email: string;
@@ -18,6 +19,7 @@ interface SignInInput {
 export default function LoginForm() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const {login} = useAppContext();
 
   const {
     register,
@@ -49,7 +51,7 @@ export default function LoginForm() {
       const { token } = response.data;
 
       if (token) {
-        localStorage.setItem("token", token);
+        login(token);
         toast.dismiss(loadingToast);
         toast.success("Welcome back! Sign in successful.");
         
