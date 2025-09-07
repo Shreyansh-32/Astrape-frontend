@@ -50,8 +50,8 @@ export default function Filters({
       category: "",
       minPrice: 0,
       maxPrice: 180000,
-      sortBy: "title",
-      order: "asc",
+      sortBy: "",
+      order: "",
     };
     setFilters(clearedFilters);
     setPriceRange([0, 180000]);
@@ -223,7 +223,7 @@ export default function Filters({
               )}
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="bg-gray-900/95 backdrop-blur-xl text-white border-gray-700/50 w-80">
+          <SheetContent side="left" className="bg-gray-900/95 backdrop-blur-xl text-white border-gray-700/50 w-80 p-4">
             <SheetHeader className="border-b border-gray-800 pb-4">
               <SheetTitle className="text-white text-left">Filters & Sorting</SheetTitle>
             </SheetHeader>
