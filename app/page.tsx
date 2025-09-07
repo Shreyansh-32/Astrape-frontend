@@ -7,14 +7,24 @@ import Filters from "@/components/Filters";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
+export interface Product{
+  id : number;
+  title : string;
+  description : string;
+  price : number;
+  quantity : number;
+  category : string;
+  imageUrl : string;
+}
+
 export default function ProductsPage() {
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState({
     search: "",
     category: "",
-    minPrice: "",
-    maxPrice: "",
+    minPrice: 0,
+    maxPrice: 180000,
     sortBy: "title",
     order: "asc",
   });

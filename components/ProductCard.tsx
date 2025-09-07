@@ -1,10 +1,11 @@
 "use client";
 
+import { Product } from "@/app/page";
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-export default function ProductCard({ product }: { product: any }) {
+export default function ProductCard({ product }: { product: Product }) {
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -74,15 +75,6 @@ export default function ProductCard({ product }: { product: any }) {
             </span>
           </div>
         )}
-        
-        {/* Discount Badge */}
-        {product.originalPrice && product.originalPrice > product.price && (
-          <div className="absolute top-4 right-4 z-10">
-            <span className="px-3 py-1.5 text-xs font-bold bg-red-500 text-white rounded-full shadow-lg animate-pulse">
-              {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF
-            </span>
-          </div>
-        )}
 
         {/* Hover Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -117,11 +109,6 @@ export default function ProductCard({ product }: { product: any }) {
           <span className="text-3xl font-bold text-white">
             {formatPrice(product.price)}
           </span>
-          {product.originalPrice && product.originalPrice > product.price && (
-            <span className="text-lg text-gray-500 line-through">
-              {formatPrice(product.originalPrice)}
-            </span>
-          )}
         </div>
 
         {/* Add to Cart Button */}

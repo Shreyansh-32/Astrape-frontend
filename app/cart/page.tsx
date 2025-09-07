@@ -6,8 +6,24 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 
+export interface Cart {
+  id: number;
+  productId: number;
+  userId: number;
+  quantity: number;
+  product: {
+    id: number;
+    title: string;
+    description: string;
+    price: number;
+    quantity: number;
+    category: string;
+    imageUrl: string;
+  };
+}
+
 export default function CartPage() {
-  const [cart, setCart] = useState<any[]>([]);
+  const [cart, setCart] = useState<Cart[]>([]);
   const [loading, setLoading] = useState(true);
   const [updatingItems, setUpdatingItems] = useState<Set<number>>(new Set());
   const token =

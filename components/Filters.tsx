@@ -9,14 +9,30 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
+
+export interface Filters{
+    search: string,
+    category: string,
+    minPrice: number,
+    maxPrice: number,
+    sortBy: string,
+    order: string,
+}
 
 export default function Filters({
   filters,
   setFilters,
 }: {
-  filters: any;
-  setFilters: any;
+  filters: Filters;
+  setFilters: Dispatch<SetStateAction<{
+    search: string;
+    category: string;
+    minPrice: number;
+    maxPrice: number;
+    sortBy: string;
+    order: string;
+}>>;
 }) {
   const [priceRange, setPriceRange] = useState([
     filters.minPrice || 0,
@@ -32,8 +48,8 @@ export default function Filters({
     const clearedFilters = {
       search: "",
       category: "",
-      minPrice: "",
-      maxPrice: "",
+      minPrice: 0,
+      maxPrice: 180000,
       sortBy: "title",
       order: "asc",
     };
