@@ -6,7 +6,7 @@ import React from 'react'
 export default function Login(){
   return (
     <div className="min-h-screen w-full flex justify-center items-center">
-      <Card className="w-2/3 md:w-[40%] lg:w-[35%]">
+      <Card className="w-3/4 md:w-[40%] lg:w-[35%]">
         <CardHeader>
           <CardTitle><div className="w-full flex flex-col items-center gap-1">
                 <Image src={"/logo.png"} alt="Logo" height={100} width={100} className="size-32" />

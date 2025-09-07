@@ -97,7 +97,7 @@ export default function LoginForm() {
         </div>
 
         {/* Form Section */}
-        <form onSubmit={handleSubmit(onSubmit)} className="px-8 pb-8">
+        <form onSubmit={handleSubmit(onSubmit)} className="md:px-8 md:pb-8 px-4 py-4">
           <div className="space-y-5">
             {/* Email Field */}
             <div className="space-y-2">

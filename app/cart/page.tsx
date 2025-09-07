@@ -159,8 +159,8 @@ export default function CartPage() {
               Your cart is empty
             </h2>
             <p className="text-gray-500 mb-8 max-w-md mx-auto">
-              Looks like you haven&apos;t added any items to your cart yet. Start
-              shopping to fill it up!
+              Looks like you haven&apos;t added any items to your cart yet.
+              Start shopping to fill it up!
             </p>
             <Link href={"/"}>
               <button className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-2xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25">
@@ -187,9 +187,9 @@ export default function CartPage() {
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <div className="p-6">
-                    <div className="flex items-center gap-6">
+                    <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
                       {/* Product Image */}
-                      <div className="relative">
+                      <div className="relative flex-shrink-0">
                         <img
                           src={item.product.imageUrl}
                           alt={item.product.title}
@@ -198,63 +198,32 @@ export default function CartPage() {
                             e.currentTarget.src = "/api/placeholder/200/200";
                           }}
                         />
-                        {item.product.category && (
-                          <span className="absolute -top-2 -right-2 px-2 py-1 text-xs font-medium bg-blue-500/20 text-blue-300 backdrop-blur-sm rounded-full border border-blue-400/30">
-                            {item.product.category}
-                          </span>
-                        )}
                       </div>
 
-                      {/* Product Details */}
-                      <div className="flex-1 min-w-0">
-                        <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-blue-300 transition-colors">
-                          {item.product.title}
-                        </h3>
-                        <p className="text-2xl font-bold text-blue-400 mb-2">
-                          {formatPrice(item.product.price)}
-                        </p>
-                        <p className="text-sm text-gray-400">
-                          Subtotal:{" "}
-                          {formatPrice(item.product.price * item.quantity)}
-                        </p>
-                      </div>
+                      {/* Product Details + Controls */}
+                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full gap-4">
+                        {/* Details */}
+                        <div className="flex-1 min-w-0 text-center sm:text-left">
+                          <h3 className="text-lg sm:text-xl font-semibold text-white mb-2 group-hover:text-blue-300 transition-colors">
+                            {item.product.title}
+                          </h3>
+                          <p className="text-xl sm:text-2xl font-bold text-blue-400 mb-2">
+                            {formatPrice(item.product.price)}
+                          </p>
+                          <p className="text-sm text-gray-400">
+                            Subtotal:{" "}
+                            {formatPrice(item.product.price * item.quantity)}
+                          </p>
+                        </div>
 
-                      {/* Quantity Controls */}
-                      <div className="flex items-center gap-4">
-                        <div className="flex items-center gap-3 bg-gray-800/50 rounded-2xl p-2 border border-gray-700/50">
-                          <button
-                            onClick={() => updateQuantity(item.productId, -1)}
-                            disabled={updatingItems.has(item.productId)}
-                            className="w-10 h-10 flex items-center justify-center bg-gray-700 hover:bg-red-600 text-white rounded-xl transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
-                          >
-                            {updatingItems.has(item.productId) ? (
-                              <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                            ) : (
-                              <svg
-                                className="w-4 h-4"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M20 12H4"
-                                />
-                              </svg>
-                            )}
-                          </button>
-
-                          <span className="w-12 text-center text-xl font-bold text-white">
-                            {item.quantity}
-                          </span>
-
-                          {item.quantity < item.product.quantity && (
+                        {/* Quantity Controls */}
+                        <div className="flex items-center justify-center sm:justify-end">
+                          <div className="flex items-center gap-3 bg-gray-800/50 rounded-2xl p-2 border border-gray-700/50">
+                            {/* - Button */}
                             <button
-                              onClick={() => updateQuantity(item.productId, 1)}
+                              onClick={() => updateQuantity(item.productId, -1)}
                               disabled={updatingItems.has(item.productId)}
-                              className="w-10 h-10 flex items-center justify-center bg-gray-700 hover:bg-green-600 text-white rounded-xl transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                              className="w-10 h-10 flex items-center justify-center bg-gray-700 hover:bg-red-600 text-white rounded-xl transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                               {updatingItems.has(item.productId) ? (
                                 <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -269,12 +238,46 @@ export default function CartPage() {
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
                                     strokeWidth={2}
-                                    d="M12 4v16m8-8H4"
+                                    d="M20 12H4"
                                   />
                                 </svg>
                               )}
                             </button>
-                          )}
+
+                            {/* Qty */}
+                            <span className="w-12 text-center text-lg sm:text-xl font-bold text-white">
+                              {item.quantity}
+                            </span>
+
+                            {/* + Button (only if stock remains) */}
+                            {item.quantity < item.product.quantity && (
+                              <button
+                                onClick={() =>
+                                  updateQuantity(item.productId, 1)
+                                }
+                                disabled={updatingItems.has(item.productId)}
+                                className="w-10 h-10 flex items-center justify-center bg-gray-700 hover:bg-green-600 text-white rounded-xl transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                              >
+                                {updatingItems.has(item.productId) ? (
+                                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                                ) : (
+                                  <svg
+                                    className="w-4 h-4"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth={2}
+                                      d="M12 4v16m8-8H4"
+                                    />
+                                  </svg>
+                                )}
+                              </button>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </div>
