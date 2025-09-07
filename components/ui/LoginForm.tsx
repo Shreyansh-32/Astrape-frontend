@@ -199,7 +199,7 @@ export default function LoginForm() {
       {/* Footer */}
       <div className="text-center mt-6">
         <p className="text-sm text-gray-300">
-          Don't have an account?{" "}
+          Don&apos;t have an account?{" "}
           <button
             type="button"
             className="text-blue-600 hover:text-blue-700 font-semibold hover:underline transition-colors duration-200"

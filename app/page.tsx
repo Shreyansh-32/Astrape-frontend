@@ -116,7 +116,7 @@ export default function ProductsPage() {
                 </div>
                 <h3 className="text-2xl font-semibold text-gray-300 mb-2">No Products Found</h3>
                 <p className="text-gray-500 max-w-md mx-auto">
-                  We couldn't find any products matching your criteria. Try adjusting your filters or search terms.
+                  We couldn&apos;t find any products matching your criteria. Try adjusting your filters or search terms.
                 </p>
               </div>
             ) : (

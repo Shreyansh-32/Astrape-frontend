@@ -159,7 +159,7 @@ export default function CartPage() {
               Your cart is empty
             </h2>
             <p className="text-gray-500 mb-8 max-w-md mx-auto">
-              Looks like you haven't added any items to your cart yet. Start
+              Looks like you haven&apos;t added any items to your cart yet. Start
               shopping to fill it up!
             </p>
             <Link href={"/"}>
